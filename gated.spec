@@ -6,8 +6,6 @@ Version:	3.5.10
 Release:	9
 License:	distributable
 Group:		Networking/Daemons
-Group(de):	Netzwerkwesen/Server
-Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.gated.org/net-research/gated/%{name}-%{src_version}.tar.gz
 Source1:	%{name}.init
 Source2:	%{name}-%{version}-Config
