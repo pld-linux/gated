@@ -78,10 +78,12 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/gated.conf.sample
 
 %post
 /sbin/ldconfig
-%chkconfig_add
+/sbin/chkconfig --add gated
 
 %preun
-%chkconfig_del
+if [ $1 = 0 ] ; then
+        /sbin/chkconfig --del gated
+fi
 
 %files
 %defattr(644,root,root,755)
