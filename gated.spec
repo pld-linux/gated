@@ -1,4 +1,5 @@
 Summary:	The GateD routing daemon
+Summary(pl):	GateD - demon routingu
 Name:		gated
 Version:	3.5.10
 %define		src_version	%(echo %version | sed 's/\\./-/g')
