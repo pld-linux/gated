@@ -18,7 +18,7 @@ Patch5:		gated-3.5.x-linuxmc.patch
 Patch6:		gated-3.5.10-ospfmonauth.patch
 Patch7:		gated-3.5.10-kern22.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Requires:	rc-scripts
+Prereq:		rc-scripts
 Prereq:		/sbin/chkconfig
 Url:		http://www.gated.org/
 
