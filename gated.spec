@@ -35,11 +35,11 @@ exchanged by routing protocols.
 
 %description -l pl
 GateD jest modu³owym programem sk³adaj±cym siê z rdzennych us³ug, bazy
-danych routingu oraz modu³ów protoko³owych, które obs³uguja wiele
+danych routingu oraz modu³ów protoko³owych, które obs³uguj± wiele
 protoko³ów rutowania (wersje 1 i 2 RIP, DCN HELLO, 2 wersja OSPF, 2
 wersja EGP oraz BGP w wersji od 2 do 4). GateD pracuje z dynamicznym
 routingiem za pomoc± bazy danych rutowania zbudowanej z informacji
-wymianianych miêdzy protoko³ami rutujacymi.
+wymienianych miêdzy protoko³ami rutujacymi.
 
 %prep
 %setup -q -n gated-3-5-10
