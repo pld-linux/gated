@@ -4,25 +4,27 @@ Name:		gated
 Version:	3.5.10
 %define		src_version	%(echo %version | sed 's/\\./-/g')
 Release:	9
-Copyright:	distributable
+License:	distributable
 Group:		Networking/Daemons
+Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.gated.org/net-research/gated/%{name}-%{src_version}.tar.gz
-Source1:	gated.init
-Source2:	gated-3.5.10-Config
-Source3:	gated-3.5.10-gated.conf
-Source4:	gated-3.5.9-krt_ifread_ioctl.c
-Patch0:		gated-3.5.7-linux.patch
-Patch1:		gated-3.5.10-glibc.patch
-Patch2:		gated-3.5.10-config.patch
-Patch4:		gated-3.5.10-dump.patch
-Patch5:		gated-3.5.x-linuxmc.patch
-Patch6:		gated-3.5.10-ospfmonauth.patch
-Patch7:		gated-3.5.10-kern22.patch
+Source1:	%{name}.init
+Source2:	%{name}-%{version}-Config
+Source3:	%{name}-%{version}-gated.conf
+Source4:	%{name}-3.5.9-krt_ifread_ioctl.c
+Patch0:		%{name}-3.5.7-linux.patch
+Patch1:		%{name}-3.5.10-glibc.patch
+Patch2:		%{name}-3.5.10-config.patch
+Patch4:		%{name}-3.5.10-dump.patch
+Patch5:		%{name}-3.5.x-linuxmc.patch
+Patch6:		%{name}-3.5.10-ospfmonauth.patch
+Patch7:		%{name}-3.5.10-kern22.patch
+URL:		http://www.gated.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Prereq:		rc-scripts
 Prereq:		/sbin/chkconfig
-Url:		http://www.gated.org/
+Prereq:		/sbin/ldconfig
 
 %description
 GateD is a modular software program consisting of core services, a
@@ -53,11 +55,11 @@ wymianianych miêdzy protoko³ami rutujacymi.
 %patch7 -p1
 
 cd src
-cp %SOURCE4 krt_ifread_ioctl.c
+cp -f %{SOURCE4} krt_ifread_ioctl.c
 
 mkdir obj.`util/archtype`
 #cp configs/linux-2.0 obj.`util/archtype`/Config
-cp %SOURCE2 obj.`util/archtype`/Config
+cp -f %{SOURCE2} obj.`util/archtype`/Config
 
 %build
 cd src
@@ -78,12 +80,20 @@ install -d $RPM_BUILD_ROOT/var/gated
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gated
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/gated.conf.sample
 
+gzip -9nf Acknowledgements BUGS CHANGES CHANGES.1 \
+	Consortium_Agreeemnt Copyright Copyright.ISIS Copyright.OSPF Licensing \
+	INSTALL ISIS-config.ps README README.bgp README.make RELEASE TODO \
+	src/configs/linux-README man/gated-2.0-impl.txt
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 /sbin/ldconfig
 /sbin/chkconfig --add gated
 
 %preun
-if [ $1 = 0 ] ; then
+if [ "$1" = "0" ] ; then
         /sbin/chkconfig --del gated
 fi
 
@@ -94,14 +104,10 @@ fi
 %{_mandir}/man8/*
 /var/gated
 
-%doc Acknowledgements BUGS CHANGES CHANGES.1
-%doc Consortium_Agreeemnt Copyright Copyright.ISIS Copyright.OSPF Licensing
-%doc INSTALL ISIS-config.ps README README.bgp README.make RELEASE TODO
-%doc conf doc src/configs/linux-README
-%doc man/gated-2.0-impl.txt
+%doc {Acknowledgements,BUGS,CHANGES,CHANGES.1}.gz
+%doc {Consortium_Agreeemnt,Copyright,Copyright.ISIS,Copyright.OSPF,Licensing}.gz
+%doc {INSTALL,ISIS-config.ps,README,README.bgp,README.make,RELEASE,TODO}.gz
+%doc conf doc src/configs/linux-README.gz man/gated-2.0-impl.txt.gz
 
 %attr(754,root,root) /etc/rc.d/init.d/gated
 %config %{_sysconfdir}/gated.conf.sample
-
-%clean
-rm -rf $RPM_BUILD_ROOT
