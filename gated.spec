@@ -5,7 +5,7 @@ Release:	9
 Copyright:	distributable
 Group:		System Environment/Daemons
 Source0:	ftp://ftp.gated.org/net-research/gated/gated-3-5-10.tar.gz
-Source1:	gated.init
+Source1:	gated-3.5.10-init
 Source2:	gated-3.5.10-Config
 Source3:	gated-3.5.10-gated.conf
 Source4:	gated-3.5.9-krt_ifread_ioctl.c
@@ -92,7 +92,7 @@ fi
 %doc conf doc src/configs/linux-README
 %doc man/gated-2.0-impl.txt
 
-/etc/rc.d/init.d/gated
+%attr(754,root,root) /etc/rc.d/init.d/gated
 %config /etc/gated.conf.sample
 
 %clean
