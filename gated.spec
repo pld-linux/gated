@@ -59,18 +59,18 @@ cp %SOURCE2 obj.`util/archtype`/Config
 
 %build
 cd src
-make config
-make CC=egcs
+%{__make} config
+%{__make} CC=egcs
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{sbindir},%{_bindir},%{_mandir}/man8},/etc/rc.d/init.d}
 
-make -C src install \
+%{__make} -C src install \
 	BINDIR=$RPM_BUILD_ROOT%{_bindir} \
 	SBINDIR=$RPM_BUILD_ROOT%{_sbindir}
 
-make MANDIR=$RPM_BUILD_ROOT%{_mandir} install-man
+%{__make} MANDIR=$RPM_BUILD_ROOT%{_mandir} install-man
 
 install -d $RPM_BUILD_ROOT/var/gated
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gated
