@@ -7,6 +7,7 @@ Release:	9
 License:	distributable
 Group:		Networking/Daemons
 Source0:	ftp://ftp.gated.org/net-research/gated/%{name}-%{src_version}.tar.gz
+# Source0-md5:	22fe312a12725df603eaf9bc76957cfd
 Source1:	%{name}.init
 Source2:	%{name}-%{version}-Config
 Source3:	%{name}-%{version}-gated.conf
