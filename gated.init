@@ -45,7 +45,6 @@ case "$1" in
 		touch /var/lock/subsys/gated
 	else
 		msg_already_running gated
-		exit 1
 	fi
 	;;
   stop)
@@ -58,21 +57,20 @@ case "$1" in
 		rm -f /var/lock/subsys/gated
 	else
 		msg_not_running gopherd
-		exit 1
 	fi
 	;;
   status)
 	$gdc running
 	;;
-  reload)
+  reload|force-reload)
 	$gdc reconfig
 	;;
   restart)
 	$gdc restart
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
 esac
 
 exit 0
