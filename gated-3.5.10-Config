@@ -1,0 +1,59 @@
+protocols	bgp icmp ospf rip egp
+
+yacc                 bison
+cc                   egcs
+lex                  flex
+ranlib               ranlib
+
+cflags               -O6 -Wall -Wno-unused -Dlinux
+yflags               -d -y -v
+lflags               -p -s -C
+ldflags              -ldb
+
+signal_h             /usr/include/sys/signal.h
+sbindir              /usr/sbin
+bindir               /usr/bin
+objdir               
+
+gdc_group            root
+config_mode	     0660
+
+path_unix            /usr/src/linux/vmlinux
+path_config          /etc/%s.conf
+path_dump            /var/gated/%s_dump
+path_dumpdir         /var/gated
+path_pid             /var/run/%s.pid
+path_version         /var/run/%s.version
+
+# These are Red Hat additions
+options NO_STDDEF_H
+options USE_SYSCTL
+options INCLUDE_IOCTL
+options GID_T=gid_t
+options sigmask(m)="(1 << ((m)-1))"
+
+# These are "vanilla" Linux-2.0
+options NO_MBUF_H
+options INCLUDE_UNISTD
+options INCLUDE_TYPES
+
+options INCLUDE_PATHS
+options USE_SETPGRP
+options HAVE_DIRENT
+#options GID_T=int
+options POSIX_SIGNALS
+options NEED_SIGNAME
+options HAVE_WAITPID
+options KRT_RTREAD_PROC
+options KRT_LLADDR_LINUX
+options ROUTES_WO_MBUFS
+options KRT_IFREAD_IOCTL
+options KRT_RT_IOCTL
+options	PROTO_ICMP
+options KRT_SYMBOLS_PROC
+options KRT_SOCKET_TYPE=PF_INET,SOCK_DGRAM,AF_UNSPEC
+options KVM_TYPE_NONE
+options VARIABLE_MASKS
+options KRT_IPMULTI_TTL0
+options SHADOW_PASSWD
+options tzsetwall()={unsetenv("TZ");tzset();}

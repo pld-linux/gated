@@ -1,0 +1,11 @@
+--- gated-3-5-7/src/include.h.linux	Tue Oct 28 14:31:31 1997
++++ gated-3-5-7/src/include.h	Tue Oct 28 14:32:39 1997
+@@ -149,8 +149,6 @@
+ #if	defined(PROTO_INET)
+ #include <netinet/in.h>
+ #ifdef	linux
+-#define  __BSD_SOURCE
+-#include <bsd/bsd.h>
+ #include <netinet/in_systm.h>
+ #else /* linux */
+ #include <netinet/in_systm.h>

@@ -1,0 +1,30 @@
+--- gated-3-5-10/src/configs/linux-2.0.orig	Fri Jul  3 01:12:54 1998
++++ gated-3-5-10/src/configs/linux-2.0	Wed Oct 28 14:20:26 1998
+@@ -9,10 +9,25 @@
+ 
+ signal_h	/usr/include/asm/signal.h
+ 
++# where to shove this stuff - FSS compliance + security 
++# symlinks in world writable dirs to libc.so.* etal!
++bindir          /usr/bin
++sbindir         /usr/sbin
++path_config     /etc/%s.conf
++path_dump       /var/gated/%s_dump
++path_dumpdir    /var/gated
++path_pid        /var/run/%s.pid
++path_version    /var/run/%s.version
++
++# sort out gdc
++gdc_group  wheel
++config_mode 0660
++
++
+ # set your favourite protocol set.
+ 
+-#protocols       bgp  icmp ospf rip egp
+-protocols       icmp ospf rip
++#protocols       bgp icmp ospf rip egp
++protocols       bgp egp icmp rip ospf rdisc
+ 
+ # List libraries required for your environment
+ ldflags		-ldb

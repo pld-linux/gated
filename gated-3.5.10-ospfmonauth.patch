@@ -1,0 +1,16 @@
+--- gated-3-5-10/src/ospf_monitor.c.orig	Fri Aug 14 04:27:55 1998
++++ gated-3-5-10/src/ospf_monitor.c	Thu Oct 29 15:51:21 1998
+@@ -551,8 +551,11 @@
+ 	if (al > OSPF_AUTH_SIMPLE_SIZE) {
+ 	    al = OSPF_AUTH_SIMPLE_SIZE;
+ 	}
+-	
+-/*	bcopy((caddr_t) auth, (caddr_t) o_hdr->ospfh_auth_key, al); */
++#ifdef PROTO_OSPF	
++	bcopy((caddr_t) auth, (caddr_t) o_hdr->ospfh_auth_key, al);
++#else
++	bcopy((caddr_t) auth, (caddr_t) o_hdr->pck_header.pck_hdr_auth.auth_int32, al);
++#endif 
+     }
+ 
+     dst.sin_family = AF_INET;

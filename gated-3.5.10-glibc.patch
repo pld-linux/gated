@@ -1,0 +1,28 @@
+--- gated-3-5-8/src/krt.c.glibc	Thu Jan  8 20:22:08 1998
++++ gated-3-5-8/src/krt.c	Thu Jan  8 20:31:20 1998
+@@ -813,7 +813,8 @@
+     if (BIT_TEST(k_flags, IFF_POINTOPOINT)) {
+ 	BIT_SET(state, IFS_POINTOPOINT);
+     }
+-#ifdef	IFF_LOOPBACK
++#if defined(IFF_LOOPBACK) || defined(__GLIBC__)  /* on glibc-based systems this is an
++						  * enum value rather than a #define */
+     if (BIT_TEST(k_flags, IFF_LOOPBACK)) {
+ 	BIT_SET(state, IFS_LOOPBACK);
+ #ifdef	_IBMR2
+@@ -826,13 +827,13 @@
+     }
+ #endif	/* IFF_LOOPBACK */
+ 
+-#ifdef	IFF_MULTICAST
++#if defined(IFF_MULTICAST) || defined(__GLIBC__)
+     if (BIT_TEST(k_flags, IFF_MULTICAST)) {
+ 	BIT_SET(state, IFS_MULTICAST);
+     }
+ #endif	/* IFF_MULTICAST */
+ 
+-#ifdef	IFF_ALLMULTI
++#if defined(IFF_ALLMULTI) || defined(__GLIBC__)
+     if (BIT_TEST(k_flags, IFF_ALLMULTI)) {
+ 	BIT_SET(state, IFS_ALLMULTI);
+     }

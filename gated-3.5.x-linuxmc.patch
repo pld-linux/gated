@@ -1,0 +1,30 @@
+--- gated-3-5-10/src/task.c~	Sun Jul 12 12:46:02 1998
++++ gated-3-5-10/src/task.c	Thu Oct 29 13:19:41 1998
+@@ -4812,7 +4812,26 @@
+ 
+     setsocketopt:
+ 	if (!BIT_TEST(task_state, TASKS_TEST)) {
+-	    rc = setsockopt(tp->task_socket, level, opt, ptr, len);
++
++#ifdef IP_MULTICAST 
++#ifdef linux
++#if LINUX_VERSION_CODE < 0x020100
++	  /* Linux 2.0.x multicast address hack to fix interface ifconfig
++	   * down then ifconfig up problem
++	   * This problem has something to do with kernel internals and the 
++	   * multicast address list on an interface getting cleared when
++	   * it physically goes down...
++           */
++	  if(option == TASKOPTION_GROUP_ADD) {
++	    /* CLEAR the kernel multicast address so that we can reinitialise
++	     * the kernel's multicast address list on the multicast interface
++	     */
++	    setsockopt(tp->task_socket, level, IP_DROP_MEMBERSHIP, ptr, len);
++	  }
++#endif
++#endif
++#endif /* IP_MULTICAST && Linux */
++	  rc = setsockopt(tp->task_socket, level, opt, ptr, len);
+ 	}
+ 	break;
+ 

@@ -1,0 +1,10 @@
+--- gated-3-5-10/src/rt_table.c.orig	Wed Jul  1 02:34:59 1998
++++ gated-3-5-10/src/rt_table.c	Wed Oct 28 14:25:55 1998
+@@ -125,6 +125,7 @@
+     {RTPROTO_OSPF,	"OSPF"},
+     {RTPROTO_OSPF_ASE,	"OSPF_ASE"},
+     {RTPROTO_IGRP,	"IGRP"},
++    {RTPROTO_HELLO,    "HELLO"},
+     {RTPROTO_RIP,	"RIP"},
+     {RTPROTO_BGP,	"BGP"},
+     {RTPROTO_EGP,	"EGP"},
