@@ -78,11 +78,6 @@ install -d $RPM_BUILD_ROOT/var/gated
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gated
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/gated.conf.sample
 
-gzip -9nf Acknowledgements BUGS CHANGES CHANGES.1 \
-	Consortium_Agreeemnt Copyright Copyright.ISIS Copyright.OSPF Licensing \
-	INSTALL ISIS-config.ps README README.bgp README.make RELEASE TODO \
-	src/configs/linux-README man/gated-2.0-impl.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -101,11 +96,11 @@ fi
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man8/*
 /var/gated
-
-%doc {Acknowledgements,BUGS,CHANGES,CHANGES.1}.gz
-%doc {Consortium_Agreeemnt,Copyright,Copyright.ISIS,Copyright.OSPF,Licensing}.gz
-%doc {INSTALL,ISIS-config.ps,README,README.bgp,README.make,RELEASE,TODO}.gz
-%doc conf doc src/configs/linux-README.gz man/gated-2.0-impl.txt.gz
+%doc Acknowledgements BUGS CHANGES CHANGES.1
+%doc Consortium_Agreeemnt Copyright Copyright.ISIS Copyright.OSPF Licensing
+%doc INSTALL ISIS-config.ps README README.bgp README.make RELEASE TODO
+%doc src/configs/linux-README man/gated-2.0-impl.txt
+%doc conf doc
 
 %attr(754,root,root) /etc/rc.d/init.d/gated
 %config %{_sysconfdir}/gated.conf.sample
