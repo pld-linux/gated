@@ -3,15 +3,15 @@
 # gated		This script is used to start/stop the gated routing
 #		daemon
 #
-# chkconfig: - 32 75
-# description: Starts and stops gated (routing daemon). GateD is a modular \
-#	software program consisting of core services, a routing database, \
-#	and protocol modules supporting multiple routing protocols (RIP \
-#	versions 1 and 2, DCN HELLO, OSPF version 2, EGP version 2 and BGP \
-#	version 2 through 4)
-# processname: gated
-# pidfile: /var/run/gated.pid
-# config: /etc/gated.conf
+# chkconfig:	- 32 75
+# description:	Starts and stops gated (routing daemon). GateD is a modular \
+#		software program consisting of core services, a routing \
+#		database, and protocol modules supporting multiple routing \
+#		protocols (RIP versions 1 and 2, DCN HELLO, OSPF version 2, \
+#		EGP version 2 and BGP version 2 through 4)
+# processname:	gated
+# pidfile:	/var/run/gated.pid
+# config:	/etc/gated.conf
 
 # Source function library.
 . /etc/rc.d/init.d/functions
