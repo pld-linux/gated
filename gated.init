@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# gated		This script is used to start/stop the gated routing
+#		daemon
+#
+# chkconfig: - 32 75
+# description: Starts and stops gated (routing daemon). GateD is a modular \
+#	software program consisting of core services, a routing database, \
+#	and protocol modules supporting multiple routing protocols (RIP \
+#	versions 1 and 2, DCN HELLO, OSPF version 2, EGP version 2 and BGP \
+#	version 2 through 4)
+# processname: gated
+# pidfile: /var/run/gated.pid
+# config: /etc/gated.conf
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ ${NETWORKING} = "no" ] && exit 0
+
+gdc=/usr/bin/gdc
+
+[ -f /etc/gated.conf ] || exit 0
+[ -f $gdc ] || exit 0
+
+PATH=$PATH:/usr/bin:/usr/sbin
+
+# See how we were called.
+case "$1" in
+  start)
+        echo -n "Starting gated: "
+        daemon gated
+        touch /var/lock/subsys/gated
+	echo
+        ;;
+  stop)
+        # Stop daemons.
+        echo -n "Shutting down gated: "
+        $gdc stop
+        echo "gated done"
+        rm -f /var/lock/subsys/gated
+        ;;
+  status)
+	$gdc running
+	;;
+  reload)
+	$gdc reconfig
+	;;
+  restart)
+	$gdc restart
+	;;
+  *)
+        echo "Usage: $0 {start|stop|status|reload|restart}"
+        exit 1
+esac
+
+exit 0
