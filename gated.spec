@@ -1,25 +1,25 @@
-Summary: The GateD routing daemon.
-Name: gated
-Version: 3.5.10
-Release: 9
-Copyright: distributable
-Group: System Environment/Daemons
-Source0: ftp://ftp.gated.org/net-research/gated/gated-3-5-10.tar.gz
-Source1: gated-3.5.10-init
-Source2: gated-3.5.10-Config
-Source3: gated-3.5.10-gated.conf
-Source4: gated-3.5.9-krt_ifread_ioctl.c
-Patch0: gated-3.5.7-linux.patch
-Patch1: gated-3.5.10-glibc.patch
-Patch2: gated-3.5.10-config.patch
-Patch4: gated-3.5.10-dump.patch
-Patch5: gated-3.5.x-linuxmc.patch
-Patch6: gated-3.5.10-ospfmonauth.patch
-Patch7: gated-3.5.10-kern22.patch
-
-Buildroot: /var/tmp/%{name}-root
-Prereq: /sbin/chkconfig
-Url: http://www.gated.org/
+Summary:	The GateD routing daemon.
+Name:		gated
+Version:	3.5.10
+Release:	9
+Copyright:	distributable
+Group:		System Environment/Daemons
+Source0:	ftp://ftp.gated.org/net-research/gated/gated-3-5-10.tar.gz
+Source1:	gated.init
+Source2:	gated-3.5.10-Config
+Source3:	gated-3.5.10-gated.conf
+Source4:	gated-3.5.9-krt_ifread_ioctl.c
+Patch0:		gated-3.5.7-linux.patch
+Patch1:		gated-3.5.10-glibc.patch
+Patch2:		gated-3.5.10-config.patch
+Patch4:		gated-3.5.10-dump.patch
+Patch5:		gated-3.5.x-linuxmc.patch
+Patch6:		gated-3.5.10-ospfmonauth.patch
+Patch7:		gated-3.5.10-kern22.patch
+Buildroot:	/var/tmp/%{name}-root
+Requires:	rc-scripts
+Prereq:		/sbin/chkconfig
+Url:		http://www.gated.org/
 
 %description
 GateD is a modular software program consisting of core services, a
