@@ -1,11 +1,12 @@
 Summary:	The GateD routing daemon
 Name:		gated
 Version:	3.5.10
+%define		src_version	%(echo %version | sed 's/\\./-/g')
 Release:	9
 Copyright:	distributable
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
-Source0:	ftp://ftp.gated.org/net-research/gated/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gated.org/net-research/gated/%{name}-%{src_version}.tar.gz
 Source1:	gated.init
 Source2:	gated-3.5.10-Config
 Source3:	gated-3.5.10-gated.conf
