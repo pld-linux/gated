@@ -1,10 +1,11 @@
-Summary:	The GateD routing daemon.
+Summary:	The GateD routing daemon
 Name:		gated
 Version:	3.5.10
 Release:	9
 Copyright:	distributable
-Group:		System Environment/Daemons
-Source0:	ftp://ftp.gated.org/net-research/gated/gated-3-5-10.tar.gz
+Group:		Networking/Daemons
+Group(pl):	Sieciowe/Serwery
+Source0:	ftp://ftp.gated.org/net-research/gated/%{name}-%{version}.tar.gz
 Source1:	gated.init
 Source2:	gated-3.5.10-Config
 Source3:	gated-3.5.10-gated.conf
@@ -24,33 +25,30 @@ Url:		http://www.gated.org/
 %description
 GateD is a modular software program consisting of core services, a
 routing database, and protocol modules which support multiple routing
-protocols (RIP versions 1 and 2, DCN HELLO, OSPF version 2, EGP version 2,
-BGP versions 2 through 4).  GateD is designed to handle dynamic routing
-with a routing database built from the information exchanged by routing
-protocols.
-
-Install gated if you need a routing daemon.
+protocols (RIP versions 1 and 2, DCN HELLO, OSPF version 2, EGP
+version 2, BGP versions 2 through 4). GateD is designed to handle
+dynamic routing with a routing database built from the information
+exchanged by routing protocols.
 
 %description -l pl
-GateD jest modu³owym programem sk³adaj±cym siê z rdzennych us³ug, bazy danych
-routingu oraz modu³ów protoko³owych, które obs³uguja wiele protoko³ów rutowania
-(wersje 1 i 2 RIP, DCN HELLO, 2 wersja OSPF, 2 wersja EGP oraz BGP w wersji od
-2 do 4). GateD pracuje z dynamicznym routingiem za pomoc± bazy danych rutowania
-zbudowanej z informacji wymianianych miêdzy protoko³ami rutujacymi.
-
-Nale¿y zainstalowaæ gated je¶li potrzebuje siê demona rutuj±cego.
+GateD jest modu³owym programem sk³adaj±cym siê z rdzennych us³ug, bazy
+danych routingu oraz modu³ów protoko³owych, które obs³uguja wiele
+protoko³ów rutowania (wersje 1 i 2 RIP, DCN HELLO, 2 wersja OSPF, 2
+wersja EGP oraz BGP w wersji od 2 do 4). GateD pracuje z dynamicznym
+routingiem za pomoc± bazy danych rutowania zbudowanej z informacji
+wymianianych miêdzy protoko³ami rutujacymi.
 
 %prep
 %setup -q -n gated-3-5-10
 
 # patch0 not applied
-%patch1 -p1 -b .glibc
-%patch2 -p1 -b .config
+%patch1 -p1
+%patch2 -p1
 # patch3 doesn't exist
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1 -b .kern22
+%patch7 -p1
 
 cd src
 cp %SOURCE4 krt_ifread_ioctl.c
@@ -66,18 +64,17 @@ make CC=egcs
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/{usr/{sbin,bin,man/man8},etc/rc.d/init.d}
+install -d $RPM_BUILD_ROOT{%{sbindir},%{_bindir},%{_mandir}/man8},/etc/rc.d/init.d}
 
-make -C src \
-    BINDIR=$RPM_BUILD_ROOT/usr/bin \
-    SBINDIR=$RPM_BUILD_ROOT/usr/sbin \
-	install
+make -C src install \
+	BINDIR=$RPM_BUILD_ROOT%{_bindir} \
+	SBINDIR=$RPM_BUILD_ROOT%{_sbindir}
 
-make MANDIR=$RPM_BUILD_ROOT/usr/man install-man
+make MANDIR=$RPM_BUILD_ROOT%{_mandir} install-man
 
-install -m 0755 -d $RPM_BUILD_ROOT/var/gated
-install -m 0755 %SOURCE1 $RPM_BUILD_ROOT/etc/rc.d/init.d/gated
-install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/gated.conf.sample
+install -d $RPM_BUILD_ROOT/var/gated
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gated
+install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/gated.conf.sample
 
 %post
 /sbin/ldconfig
@@ -89,10 +86,10 @@ if [ $1 = 0 ] ; then
 fi
 
 %files
-%defattr(-,root,root)
-/usr/sbin/gated
-%attr(755,root,root) /usr/bin/*
-/usr/man/man8/*
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_sbindir}/gated
+%attr(755,root,root) %{_bindir}/*
+%{_mandir}/man8/*
 /var/gated
 
 %doc Acknowledgements BUGS CHANGES CHANGES.1
@@ -102,7 +99,7 @@ fi
 %doc man/gated-2.0-impl.txt
 
 %attr(754,root,root) /etc/rc.d/init.d/gated
-%config /etc/gated.conf.sample
+%config %{_sysconfdir}/gated.conf.sample
 
 %clean
 rm -rf $RPM_BUILD_ROOT
