@@ -1,3 +1,4 @@
+# TODO: FHS (/var/gated)
 Summary:	The GateD routing daemon
 Summary(pl):	GateD - demon routingu
 Name:		gated
@@ -20,10 +21,9 @@ Patch5:		%{name}-3.5.x-linuxmc.patch
 Patch6:		%{name}-3.5.10-ospfmonauth.patch
 Patch7:		%{name}-3.5.10-kern22.patch
 URL:		http://www.gated.org/
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Prereq:		rc-scripts
-Prereq:		/sbin/chkconfig
-Prereq:		/sbin/ldconfig
 
 %description
 GateD is a modular software program consisting of core services, a
@@ -83,7 +83,6 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/gated.conf.sample
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/ldconfig
 /sbin/chkconfig --add gated
 
 %preun
