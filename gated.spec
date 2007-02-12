@@ -1,6 +1,6 @@
 # TODO: FHS (/var/gated)
 Summary:	The GateD routing daemon
-Summary(pl):	GateD - demon routingu
+Summary(pl.UTF-8):   GateD - demon routingu
 Name:		gated
 Version:	3.5.10
 %define		src_version	%(echo %{version} | tr . -)
@@ -33,13 +33,13 @@ version 2, BGP versions 2 through 4). GateD is designed to handle
 dynamic routing with a routing database built from the information
 exchanged by routing protocols.
 
-%description -l pl
-GateD jest modu≥owym programem sk≥adaj±cym siÍ z rdzennych us≥ug, bazy
-danych routingu oraz modu≥Ûw protoko≥owych, ktÛre obs≥uguj± wiele
-protoko≥Ûw rutowania (wersje 1 i 2 RIP, DCN HELLO, 2 wersja OSPF, 2
+%description -l pl.UTF-8
+GateD jest modu≈Çowym programem sk≈ÇadajƒÖcym siƒô z rdzennych us≈Çug, bazy
+danych routingu oraz modu≈Ç√≥w protoko≈Çowych, kt√≥re obs≈ÇugujƒÖ wiele
+protoko≈Ç√≥w rutowania (wersje 1 i 2 RIP, DCN HELLO, 2 wersja OSPF, 2
 wersja EGP oraz BGP w wersji od 2 do 4). GateD pracuje z dynamicznym
-routingiem za pomoc± bazy danych rutowania zbudowanej z informacji
-wymienianych miÍdzy protoko≥ami rutujacymi.
+routingiem za pomocƒÖ bazy danych rutowania zbudowanej z informacji
+wymienianych miƒôdzy protoko≈Çami rutujacymi.
 
 %prep
 %setup -q -n gated-3-5-10
