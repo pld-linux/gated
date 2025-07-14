@@ -45,13 +45,13 @@ wymienianych między protokołami rutujacymi.
 %setup -q -n gated-3-5-10
 
 # patch0 not applied
-%patch1 -p1
-%patch2 -p1
+%patch -P1 -p1
+%patch -P2 -p1
 # patch3 doesn't exist
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
+%patch -P4 -p1
+%patch -P5 -p1
+%patch -P6 -p1
+%patch -P7 -p1
 
 cd src
 cp -f %{SOURCE4} krt_ifread_ioctl.c
